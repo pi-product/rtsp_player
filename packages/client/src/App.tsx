@@ -228,14 +228,16 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: 13,
   },
   grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(480px, 1fr))',
+    display: 'flex',
+    flexWrap: 'wrap',
     gap: 20,
+    justifyContent: 'center',
   },
   card: {
     display: 'flex',
     flexDirection: 'column',
     gap: 6,
+    width: 'min(560px, 100%)',
   },
   streamLabel: {
     fontSize: 12,
