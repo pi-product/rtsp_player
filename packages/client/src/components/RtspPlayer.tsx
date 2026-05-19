@@ -4,12 +4,13 @@ import Hls from 'hls.js';
 interface Props {
   sessionId: string;
   hlsUrl: string;
+  serverUrl: string;
   onStop: () => void;
 }
 
 type ReadyState = 'waiting' | 'loading' | 'playing' | 'error';
 
-export default function RtspPlayer({ sessionId, hlsUrl, onStop }: Props) {
+export default function RtspPlayer({ sessionId, hlsUrl, serverUrl, onStop }: Props) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const hlsRef = useRef<Hls | null>(null);
   const [state, setState] = useState<ReadyState>('waiting');
@@ -82,7 +83,7 @@ export default function RtspPlayer({ sessionId, hlsUrl, onStop }: Props) {
 
   const handleStop = async () => {
     hlsRef.current?.destroy();
-    await fetch(`/api/streams/${sessionId}`, { method: 'DELETE' });
+    await fetch(`${serverUrl}/api/streams/${sessionId}`, { method: 'DELETE' });
     onStop();
   };
 
